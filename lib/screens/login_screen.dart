@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-//import 'dashboard_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+
 
 const users = {
   'dribbble@gmail.com': '12345',
@@ -48,11 +50,52 @@ class LoginScreen extends StatelessWidget {
       logo: const AssetImage('assets/images/logoCerberus.png'),
       onLogin: _authUser,
       onSignup: _signupUser,
-      onSubmitAnimationCompleted: () {
-        /*Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => password_screen(),
-        ));*/
-      },
+      
+        loginProviders: <LoginProvider>[
+          LoginProvider(
+            icon: FontAwesomeIcons.google,
+            label: 'Google',
+            callback: () async {
+              debugPrint('start google sign in');
+              await Future.delayed(loginTime);
+              debugPrint('stop google sign in');              
+              return null;
+            },
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.facebookF,
+            label: 'Facebook',
+            callback: () async {            
+              debugPrint('start facebook sign in');
+              await Future.delayed(loginTime);
+              debugPrint('stop facebook sign in');              
+              return null;
+            },
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.linkedinIn,
+            callback: () async {         
+              debugPrint('start linkdin sign in');
+              await Future.delayed(loginTime);         
+              debugPrint('stop linkdin sign in');              
+              return null;
+            },
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.githubAlt,
+            callback: () async {
+              debugPrint('start github sign in');
+              await Future.delayed(loginTime);
+              debugPrint('stop github sign in');              
+              return null;
+            },
+          ),
+        ],
+      /*onSubmitAnimationCompleted: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => DashboardScreen(),
+        ));
+      },*/
       onRecoverPassword: _recoverPassword,
     );
   }
